@@ -115,7 +115,6 @@ function exec()
 	var tmp = next();
 	if( tmp == null )
 	{
-		clearInterval();
 		return;
 	}
 	
@@ -123,9 +122,4 @@ function exec()
 	
 	setTimeout( function(){ exec()}, (tmp.time * 1000) );
 //	exec();
-}
-
-function test()
-{
-	alert("AJGKHBGJJB");
 }
