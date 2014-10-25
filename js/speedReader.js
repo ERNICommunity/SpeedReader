@@ -9,7 +9,14 @@ var metrics = {
 		RIGHT_MIDDLE_VOWEL: "Use the vowel right from the middle"
 	}
 
+var speed_metrics = { 
+		ALL_SAME: "All length are equals", 
+		DURATION_BY_WORDLENGTH: "Duration is calculated by length of the words",
+		RANDOM_DIFF: "Duration +- 10 % for testing"
+	}
+
 var typeOfMarkingValue = metrics.FIRST_VOWEL;
+var typeOfSpeedMetricValue = speed_metrics.ALL_SAME;
 
 function configure( wordsPerMinute )
 {
@@ -39,7 +46,25 @@ function next( )
 	currentWord++;
 	var nextWord = listOfWords[ currentWord ];
 	var number = getMark( nextWord );
-	var timeValue = 60 / wordsPerMinuteValue;
+	var timeValue = null;
+	
+	
+	if( speed_metrics == speed_metrics.ALL_SAME )
+	{
+		timeValue = 60 / wordsPerMinuteValue;
+	}
+	else if( speed_metrics == speed_metrics.DURATION_BY_WORDLENGTH )
+	{
+		timeValue = 60 / wordsPerMinuteValue;
+		//TODO NOT FINISHED
+	}
+	else if( speed_metrics == speed_metrics.RANDOM_DIFF )
+	{
+		timeValue = 60 / wordsPerMinuteValue;
+		var num = Math.random();
+		num = num + 0.5;
+		timeValue = timeValue * num;
+	}
 	
 	return { value:nextWord, mark:number, time:timeValue};
 }
