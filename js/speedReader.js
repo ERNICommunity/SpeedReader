@@ -16,7 +16,7 @@ var speed_metrics = {
 	}
 
 var typeOfMarkingValue = metrics.FIRST_VOWEL;
-var typeOfSpeedMetricValue = speed_metrics.ALL_SAME;
+var typeOfSpeedMetricValue = speed_metrics.RANDOM_DIFF;
 
 function configure( wordsPerMinute )
 {
@@ -38,7 +38,7 @@ function init( totalString )
 
 function next( )
 {
-	if( listOfWords.length <= currentWord)
+	if( listOfWords.length < currentWord + 2)
 	{
 		return null;
 	}
@@ -49,16 +49,16 @@ function next( )
 	var timeValue = null;
 	
 	
-	if( speed_metrics == speed_metrics.ALL_SAME )
+	if( typeOfSpeedMetricValue == speed_metrics.ALL_SAME )
 	{
 		timeValue = 60 / wordsPerMinuteValue;
 	}
-	else if( speed_metrics == speed_metrics.DURATION_BY_WORDLENGTH )
+	else if( typeOfSpeedMetricValue == speed_metrics.DURATION_BY_WORDLENGTH )
 	{
 		timeValue = 60 / wordsPerMinuteValue;
 		//TODO NOT FINISHED
 	}
-	else if( speed_metrics == speed_metrics.RANDOM_DIFF )
+	else if( typeOfSpeedMetricValue == speed_metrics.RANDOM_DIFF )
 	{
 		timeValue = 60 / wordsPerMinuteValue;
 		var num = Math.random();
@@ -113,8 +113,16 @@ function getMark( wordToMark )
 function exec()
 {
 	var tmp = next();
-	document.getElementById('field').text = tmp.value + " " + tmp.mark + " " + tmp.time ;
-	alert( document.getElementById('field').text );
+	if( tmp == null )
+	{
+		clearInterval();
+		return;
+	}
+	
+	document.getElementById('field').innerHTML = "" + tmp.value + " " + tmp.mark + " " + tmp.time ;
+	
+	setTimeout( function(){ exec()}, (tmp.time * 1000) );
+//	exec();
 }
 
 function test()
