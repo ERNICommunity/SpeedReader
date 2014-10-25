@@ -120,7 +120,6 @@ function exec()
 	var tmp = next();
 	if( tmp == null )
 	{
-		clearInterval();
 		return;
 	}
 	
@@ -129,11 +128,6 @@ function exec()
 	setTime(tmp.time * 1000);
 	//setTimeout( function(){ exec()}, (tmp.time * 1000) );
 //	exec();
-}
-
-function test()
-{
-	alert("AJGKHBGJJB");
 }
 
 attachEventHandler(exec);
