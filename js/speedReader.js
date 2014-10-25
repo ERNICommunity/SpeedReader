@@ -2,6 +2,10 @@ var listOfWords = new Array("Lorem", "ipsum", "dolor", "sit");
 var currentWord = 0;
 var wordsPerMinuteValue = 250;
 
+var myTimeIntervalMillis = 1000;
+var myTimerObj;
+var myEventHandler = null;
+
 
 var metrics = { 
 		FIRST_VOWEL: "Use first vowel", 
@@ -31,6 +35,7 @@ function configure( wordsPerMinute, typeOfMarking )
 
 function init( totalString )
 {
+	currentWord = 0;
 	//TODO
 	var tmp = totalString; // "adfkujghasldkf alskdflklk";
 	listOfWords = tmp.split(/\s+/);
@@ -43,8 +48,8 @@ function next( )
 		return null;
 	}
 	
-	currentWord++;
 	var nextWord = listOfWords[ currentWord ];
+	currentWord++;
 	var number = getMark( nextWord );
 	var timeValue = null;
 	
@@ -120,8 +125,9 @@ function exec()
 	}
 	
 	document.getElementById('field').innerHTML = "" + tmp.value + " " + tmp.mark + " " + tmp.time ;
-	
-	setTimeout( function(){ exec()}, (tmp.time * 1000) );
+
+	setTime(tmp.time * 1000);
+	//setTimeout( function(){ exec()}, (tmp.time * 1000) );
 //	exec();
 }
 
@@ -129,3 +135,34 @@ function test()
 {
 	alert("AJGKHBGJJB");
 }
+
+attachEventHandler(exec);
+
+
+function attachEventHandler(eventHandler) {
+	myEventHandler = eventHandler;
+}
+
+function runTimer() {
+	myTimerStart();
+}
+
+function stopTimer() {
+	clearTimeout(myTimerObj);
+}
+
+function setTime(intervalMillis) {
+	myTimeIntervalMillis = intervalMillis;
+}
+
+function myTimerStart() {
+	myTimerObj = setTimeout(function(){timeExpiredEvent()},myTimeIntervalMillis);
+}
+
+function timeExpiredEvent() {
+	if (myEventHandler != null) {
+		myEventHandler();
+	}
+	myTimerStart();
+}
+
