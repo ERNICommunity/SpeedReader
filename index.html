@@ -7,6 +7,8 @@
     <title>Speedreader</title>
 
     <!-- Bootstrap -->
+
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 	
@@ -15,9 +17,9 @@
 	<!-- JS timer -->
 	 <script src="./js/jquery.timer.js"></script>
 	<!-- JS main file -->
-	 <script src="./js/main.js"></script> 
-	 
+	 <script src="./js/main.js"></script>
 
+    <script type="text/javascript" src="js/speedReader.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,15 +67,26 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+
 <div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
-		<div class="input-group input-group-lg">
-			<input id="speedText" type="text" class="form-control">
-		</div>
-	</div><!-- /.col-lg-4 -->
+    <div class="result">
+
+        </div>
+
+</div>
+
+
+<div class="row">
+
+
+        <textarea id="sampleText" class="form-control" rows="10"></textarea>
+
 </div><!-- /.row -->
 
 
+<button type="button" id="go" onclick="begin()" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-star"></span> Begin
+</button>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

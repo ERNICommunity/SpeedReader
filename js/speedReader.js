@@ -37,9 +37,20 @@ function init( totalString )
 {
 	currentWord = 0;
 	//TODO
-	var tmp = totalString; // "adfkujghasldkf alskdflklk";
-	listOfWords = tmp.split(/\s+/);
+
+	listOfWords = totalString.split(/\s+/);
 }
+
+function begin( )
+{
+    var text = $("#sampleText").val();
+    $("#sampleText").hide();
+    init(text);
+    runTimer();
+}
+
+
+
 
 function next( )
 {
@@ -117,15 +128,29 @@ function getMark( wordToMark )
 
 function exec()
 {
-	var tmp = next();
-	if( tmp == null )
+	var word = next();
+	if( word == null )
 	{
 		return;
 	}
-	
-	document.getElementById('field').innerHTML = "" + tmp.value + " " + tmp.mark + " " + tmp.time ;
 
-	setTime(tmp.time * 1000);
+
+    var breakLetter = Math.floor(word.value.length /2);
+
+
+    var firstPart = word.value.substring(0, breakLetter);
+
+    var hightlight =  "<span style='color:red'>" + word.value.substring(breakLetter, breakLetter +1) + "</span>";
+
+
+    var secondPart =   word.value.substring(breakLetter+1 , word.length);
+
+
+
+    $(".result").empty();
+    $(".result").append(firstPart + hightlight + secondPart);
+
+	setTime(word.time * 1000);
 	//setTimeout( function(){ exec()}, (tmp.time * 1000) );
 //	exec();
 }
